@@ -10,10 +10,11 @@ import { useAuthStore } from "./store/useAuthStore.js"
 import { useEffect } from "react"
 import 'ldrs/helix'
 import { Toaster } from "react-hot-toast"
+import { useThemeStore } from "./store/useThemeStore.js"
 
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
-
+  const { theme } = useThemeStore();
   useEffect(() => {
     checkAuth()
   }, [checkAuth]);
@@ -31,7 +32,7 @@ function App() {
   )
 
   return (
-    <div>
+    <div data-theme={theme}>
       <Navbar />
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
